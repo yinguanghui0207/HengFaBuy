@@ -8,12 +8,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
 	    <link rel="dns-prefetch" href="https://123juhui.com">
 		<title>郑州迅启,聚惠活动</title>
-
+		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="css/index.css">
 	</head>
 	<body>
 		<!--[if lte IE 8]>
-	<div class="text-center padding-top-50 padding-bottom-50 bg-blue-grey-100">
+	<div class="alert text-center padding-top-50 padding-bottom-50 bg-blue-grey-100">
 	<p class="browserupgrade font-size-18">你正在使用一个<strong>过时</strong>的浏览器。请<a href="http://browsehappy.com/" target="_blank">升级您的浏览器</a>，以提高您的体验。</p>
 	</div>
 <![endif]-->
@@ -25,10 +25,10 @@
 				</div>
 				<ul class="nav-list">
 					<li class="nav-item current"><a href="###">首页</a></li>
-					<li class="nav-item"><a href="jhhd.html">聚惠活动平台</a></li>
-					<li class="nav-item"><a href="shzr.html">社会责任</a></li>
-					<li class="nav-item"><a href="join.html">入驻加盟</a></li>
-					<li class="nav-item"><a href="about.html">关于我们</a></li>
+					<li class="nav-item"><a href="/pages/jhhd.html">聚惠活动平台</a></li>
+					<li class="nav-item"><a href="/pages/shzr.html">社会责任</a></li>
+					<li class="nav-item"><a href="/pages/join.html">入驻加盟</a></li>
+					<li class="nav-item"><a href="/pages/about.html">关于我们</a></li>
 					
 				</ul>
 				<span id="login" class="login-btn">登录</span>
@@ -58,8 +58,8 @@
 		</div>
 		
 		<!-- 聚惠活动平台 -->
-		<div class="section-box introduction-box juhui-box">
-			<img class="banner" src="image/jhhdpt-bg.jpg" alt="">
+		<div class="section-box juhui-box">
+			<!-- <img class="banner" src="image/jhhdpt-bg.jpg" alt=""> -->
 			<div class="box">
 				<p class="title"></p>
 				<div class="content">
@@ -145,13 +145,14 @@
 				<div class="box">
 					<p class="title"></p>
 					<div class="partner-content">
-						<div class="text-box">
+						<div class="text-box" >
 							<p class="title-text">尊敬的访客，您好！</p>
 							<p class="texts">感谢您来到郑州讯启，若您有合作意向，请您为我们
 									留言或联系我们，我们将尽快给您回复，并为您提供
 									最真诚的服务，谢谢。</p>
-							<ul class="form-list">
-								<p class="form-title">恭喜以下用户成功加盟</p>	
+						<div class="txt-box" id="txtbox" >
+							<p class="form-title">恭喜以下用户成功加盟</p>
+							<ul class="form-list" id="list">
 								<li><span class="name">李**</span><span class="tel">138****2126</span><span class="add">河南 郑州</span></li>
 								<li><span class="name">王*</span><span class="tel">131****3325</span><span class="add">河南 郑州</span></li>
 								<li><span class="name">柳**</span><span class="tel">152****6639</span><span class="add">河南 郑州</span></li>
@@ -160,32 +161,43 @@
 								<li><span class="name">刘**</span><span class="tel">176****3922</span><span class="add">河南 郑州</span></li>
 								<li><span class="name">王**</span><span class="tel">152****8763</span><span class="add">河南 郑州</span></li>
 								<li><span class="name">赵**</span><span class="tel">138****6956</span><span class="add">河南 郑州</span></li>
+								<li><span class="name">马**</span><span class="tel">138****3135</span><span class="add">河南 郑州</span></li>
+								<li><span class="name">朱*</span><span class="tel">131****5213</span><span class="add">河南 郑州</span></li>
+								<li><span class="name">王**</span><span class="tel">152****1321</span><span class="add">河南 郑州</span></li>
+								<li><span class="name">张*</span><span class="tel">188****7890</span><span class="add">河南 郑州</span></li>
+								<li><span class="name">赵**</span><span class="tel">187****3568</span><span class="add">河南 郑州</span></li>
+								<li><span class="name">秦**</span><span class="tel">176****6569</span><span class="add">河南 郑州</span></li>
+								<li><span class="name">王**</span><span class="tel">152****0021</span><span class="add">河南 郑州</span></li>
+								<li><span class="name">韩**</span><span class="tel">138****2238</span><span class="add">河南 郑州</span></li>
+							
 							</ul>
+						</div>
+						
 						</div>
 
 						<div class="form-box">
 							<ul>
 								<li>
 									<p>姓名 Name</p>
-									<input type="text" maxlength="20" required>
+									<input type="text" maxlength="20" id="name" required>
 								</li>
 								<li>
 									<p>电话 Phone</p>
-									<input type="tel" maxlength="11" required>
+									<input type="tel" maxlength="11" id="phone" required>
 								</li>
 								<li>
 									<p>城市 City</p>
-									<input type="text" maxlength="50" required>
+									<input type="text" maxlength="50" id="city" required>
 								</li>
 								<li>
 									<p>留言 Messages</p>
 									<div class="input">
-									<textarea name="" id="" cols="35" rows="7" maxlength="300"></textarea>
+									<textarea name="messages" id="messages" cols="35" rows="7" maxlength="300"></textarea>
 									</div>
 									
 								</li>
 								<li class="btn-box">
-									<span class="btn">提交</span>
+									<span id="submit" class="btn">提交</span>
 								</li>
 							</ul>
 						</div>
@@ -203,7 +215,15 @@
 			
 		</div>
 		
+		<div id="alert" class="wrapper-box" >
+			<div class="wrapper">
+				<p class="title">温馨提示</p>
+				<p class="content" id="msg">提示信息提示信息提示信息提示信息提示信息提示信息</p>
+				<p class="button" id="cancel">确定</p>
+			</div>
+		</div>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/scroll.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 
 	</body>
