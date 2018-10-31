@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunqi.mapper.TicketListMapper" >
+  <resultMap id="BaseResultMap" type="com.xunqi.pojo.TicketList" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="activity_id" property="activityId" jdbcType="INTEGER" />
+    <result column="ticket_id" property="ticketId" jdbcType="INTEGER" />
+    <result column="ticket_name" property="ticketName" jdbcType="VARCHAR" />
+    <result column="ticket_price" property="ticketPrice" jdbcType="VARCHAR" />
+    <result column="ticket_num" property="ticketNum" jdbcType="INTEGER" />
+    <result column="canbuy_num" property="canbuyNum" jdbcType="INTEGER" />
+    <result column="examine" property="examine" jdbcType="INTEGER" />
+    <result column="ticket_tips" property="ticketTips" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, activity_id, ticket_id, ticket_name, ticket_price, ticket_num, canbuy_num, examine, 
+    ticket_tips, create_time, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xunqi.pojo.TicketListExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ticket_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ticket_list
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ticket_list
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xunqi.pojo.TicketListExample" >
+    delete from ticket_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunqi.pojo.TicketList" >
+    insert into ticket_list (id, activity_id, ticket_id, 
+      ticket_name, ticket_price, ticket_num, 
+      canbuy_num, examine, ticket_tips, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{activityId,jdbcType=INTEGER}, #{ticketId,jdbcType=INTEGER}, 
+      #{ticketName,jdbcType=VARCHAR}, #{ticketPrice,jdbcType=VARCHAR}, #{ticketNum,jdbcType=INTEGER}, 
+      #{canbuyNum,jdbcType=INTEGER}, #{examine,jdbcType=INTEGER}, #{ticketTips,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunqi.pojo.TicketList" >
+    insert into ticket_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="activityId != null" >
+        activity_id,
+      </if>
+      <if test="ticketId != null" >
+        ticket_id,
+      </if>
+      <if test="ticketName != null" >
+        ticket_name,
+      </if>
+      <if test="ticketPrice != null" >
+        ticket_price,
+      </if>
+      <if test="ticketNum != null" >
+        ticket_num,
+      </if>
+      <if test="canbuyNum != null" >
+        canbuy_num,
+      </if>
+      <if test="examine != null" >
+        examine,
+      </if>
+      <if test="ticketTips != null" >
+        ticket_tips,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="activityId != null" >
+        #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="ticketId != null" >
+        #{ticketId,jdbcType=INTEGER},
+      </if>
+      <if test="ticketName != null" >
+        #{ticketName,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketPrice != null" >
+        #{ticketPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketNum != null" >
+        #{ticketNum,jdbcType=INTEGER},
+      </if>
+      <if test="canbuyNum != null" >
+        #{canbuyNum,jdbcType=INTEGER},
+      </if>
+      <if test="examine != null" >
+        #{examine,jdbcType=INTEGER},
+      </if>
+      <if test="ticketTips != null" >
+        #{ticketTips,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunqi.pojo.TicketListExample" resultType="java.lang.Integer" >
+    select count(*) from ticket_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ticket_list
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.activityId != null" >
+        activity_id = #{record.activityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ticketId != null" >
+        ticket_id = #{record.ticketId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ticketName != null" >
+        ticket_name = #{record.ticketName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ticketPrice != null" >
+        ticket_price = #{record.ticketPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ticketNum != null" >
+        ticket_num = #{record.ticketNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.canbuyNum != null" >
+        canbuy_num = #{record.canbuyNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.examine != null" >
+        examine = #{record.examine,jdbcType=INTEGER},
+      </if>
+      <if test="record.ticketTips != null" >
+        ticket_tips = #{record.ticketTips,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ticket_list
+    set id = #{record.id,jdbcType=INTEGER},
+      activity_id = #{record.activityId,jdbcType=INTEGER},
+      ticket_id = #{record.ticketId,jdbcType=INTEGER},
+      ticket_name = #{record.ticketName,jdbcType=VARCHAR},
+      ticket_price = #{record.ticketPrice,jdbcType=VARCHAR},
+      ticket_num = #{record.ticketNum,jdbcType=INTEGER},
+      canbuy_num = #{record.canbuyNum,jdbcType=INTEGER},
+      examine = #{record.examine,jdbcType=INTEGER},
+      ticket_tips = #{record.ticketTips,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunqi.pojo.TicketList" >
+    update ticket_list
+    <set >
+      <if test="activityId != null" >
+        activity_id = #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="ticketId != null" >
+        ticket_id = #{ticketId,jdbcType=INTEGER},
+      </if>
+      <if test="ticketName != null" >
+        ticket_name = #{ticketName,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketPrice != null" >
+        ticket_price = #{ticketPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketNum != null" >
+        ticket_num = #{ticketNum,jdbcType=INTEGER},
+      </if>
+      <if test="canbuyNum != null" >
+        canbuy_num = #{canbuyNum,jdbcType=INTEGER},
+      </if>
+      <if test="examine != null" >
+        examine = #{examine,jdbcType=INTEGER},
+      </if>
+      <if test="ticketTips != null" >
+        ticket_tips = #{ticketTips,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunqi.pojo.TicketList" >
+    update ticket_list
+    set activity_id = #{activityId,jdbcType=INTEGER},
+      ticket_id = #{ticketId,jdbcType=INTEGER},
+      ticket_name = #{ticketName,jdbcType=VARCHAR},
+      ticket_price = #{ticketPrice,jdbcType=VARCHAR},
+      ticket_num = #{ticketNum,jdbcType=INTEGER},
+      canbuy_num = #{canbuyNum,jdbcType=INTEGER},
+      examine = #{examine,jdbcType=INTEGER},
+      ticket_tips = #{ticketTips,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByActivityId" resultMap="BaseResultMap" parameterType="com.xunqi.pojo.TicketList" >
+  SELECT * FROM ticket_list 
+  WHERE activity_id =  #{activityId,jdbcType=INTEGER}
+  </select>
+  <update id="updateTicketNumByTicketIdSelective" parameterType="com.xunqi.pojo.TicketList" >
+    update ticket_list
+    set       
+      ticket_num = ticket_num -1     
+    where ticket_id = #{ticketId,jdbcType=INTEGER}
+  </update>
+  
+</mapper>

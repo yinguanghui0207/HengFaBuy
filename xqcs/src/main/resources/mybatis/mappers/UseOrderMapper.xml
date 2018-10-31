@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunqi.mapper.UseOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.xunqi.pojo.UseOrder" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="activity_id" property="activityId" jdbcType="INTEGER" />
+    <result column="use_id" property="useId" jdbcType="VARCHAR" />
+    <result column="activity_title" property="activityTitle" jdbcType="VARCHAR" />
+    <result column="order_form" property="orderForm" jdbcType="VARCHAR" />
+    <result column="ticket_no" property="ticketNo" jdbcType="VARCHAR" />
+    <result column="ticket" property="ticket" jdbcType="VARCHAR" />
+    <result column="ticket_info" property="ticketInfo" jdbcType="VARCHAR" />
+    <result column="ticket_state" property="ticketState" jdbcType="INTEGER" />
+    <result column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, activity_id, use_id, activity_title, order_form, ticket_no, ticket, ticket_info, 
+    ticket_state, order_state, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xunqi.pojo.UseOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from use_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from use_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from use_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xunqi.pojo.UseOrderExample" >
+    delete from use_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunqi.pojo.UseOrder" >
+    insert into use_order (id, activity_id, use_id, 
+      activity_title, order_form, ticket_no, 
+      ticket, ticket_info, ticket_state, 
+      order_state, create_time)
+    values (#{id,jdbcType=INTEGER}, #{activityId,jdbcType=INTEGER}, #{useId,jdbcType=VARCHAR}, 
+      #{activityTitle,jdbcType=VARCHAR}, #{orderForm,jdbcType=VARCHAR}, #{ticketNo,jdbcType=VARCHAR}, 
+      #{ticket,jdbcType=VARCHAR}, #{ticketInfo,jdbcType=VARCHAR}, #{ticketState,jdbcType=INTEGER}, 
+      #{orderState,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunqi.pojo.UseOrder" >
+    insert into use_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="activityId != null" >
+        activity_id,
+      </if>
+      <if test="useId != null" >
+        use_id,
+      </if>
+      <if test="activityTitle != null" >
+        activity_title,
+      </if>
+      <if test="orderForm != null" >
+        order_form,
+      </if>
+      <if test="ticketNo != null" >
+        ticket_no,
+      </if>
+      <if test="ticket != null" >
+        ticket,
+      </if>
+      <if test="ticketInfo != null" >
+        ticket_info,
+      </if>
+      <if test="ticketState != null" >
+        ticket_state,
+      </if>
+      <if test="orderState != null" >
+        order_state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="activityId != null" >
+        #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="useId != null" >
+        #{useId,jdbcType=VARCHAR},
+      </if>
+      <if test="activityTitle != null" >
+        #{activityTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="orderForm != null" >
+        #{orderForm,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketNo != null" >
+        #{ticketNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ticket != null" >
+        #{ticket,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketInfo != null" >
+        #{ticketInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketState != null" >
+        #{ticketState,jdbcType=INTEGER},
+      </if>
+      <if test="orderState != null" >
+        #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunqi.pojo.UseOrderExample" resultType="java.lang.Integer" >
+    select count(*) from use_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update use_order
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.activityId != null" >
+        activity_id = #{record.activityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.useId != null" >
+        use_id = #{record.useId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityTitle != null" >
+        activity_title = #{record.activityTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderForm != null" >
+        order_form = #{record.orderForm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ticketNo != null" >
+        ticket_no = #{record.ticketNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ticket != null" >
+        ticket = #{record.ticket,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ticketInfo != null" >
+        ticket_info = #{record.ticketInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ticketState != null" >
+        ticket_state = #{record.ticketState,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderState != null" >
+        order_state = #{record.orderState,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update use_order
+    set id = #{record.id,jdbcType=INTEGER},
+      activity_id = #{record.activityId,jdbcType=INTEGER},
+      use_id = #{record.useId,jdbcType=VARCHAR},
+      activity_title = #{record.activityTitle,jdbcType=VARCHAR},
+      order_form = #{record.orderForm,jdbcType=VARCHAR},
+      ticket_no = #{record.ticketNo,jdbcType=VARCHAR},
+      ticket = #{record.ticket,jdbcType=VARCHAR},
+      ticket_info = #{record.ticketInfo,jdbcType=VARCHAR},
+      ticket_state = #{record.ticketState,jdbcType=INTEGER},
+      order_state = #{record.orderState,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunqi.pojo.UseOrder" >
+    update use_order
+    <set >
+      <if test="activityId != null" >
+        activity_id = #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="useId != null" >
+        use_id = #{useId,jdbcType=VARCHAR},
+      </if>
+      <if test="activityTitle != null" >
+        activity_title = #{activityTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="orderForm != null" >
+        order_form = #{orderForm,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketNo != null" >
+        ticket_no = #{ticketNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ticket != null" >
+        ticket = #{ticket,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketInfo != null" >
+        ticket_info = #{ticketInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketState != null" >
+        ticket_state = #{ticketState,jdbcType=INTEGER},
+      </if>
+      <if test="orderState != null" >
+        order_state = #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunqi.pojo.UseOrder" >
+    update use_order
+    set activity_id = #{activityId,jdbcType=INTEGER},
+      use_id = #{useId,jdbcType=VARCHAR},
+      activity_title = #{activityTitle,jdbcType=VARCHAR},
+      order_form = #{orderForm,jdbcType=VARCHAR},
+      ticket_no = #{ticketNo,jdbcType=VARCHAR},
+      ticket = #{ticket,jdbcType=VARCHAR},
+      ticket_info = #{ticketInfo,jdbcType=VARCHAR},
+      ticket_state = #{ticketState,jdbcType=INTEGER},
+      order_state = #{orderState,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findOrderByActivityId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from use_order where activity_id = #{activityId,jdbcType=INTEGER}
+	</select>
+  <select id="findOrderByUseId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * from use_order where  use_id = #{useId,jdbcType=VARCHAR}
+	</select>
+  <select id="findOrderByUseIdAndS" parameterType="com.xunqi.pojo.UseOrder" resultMap="BaseResultMap">
+		SELECT * from use_order where  use_id = #{useId,jdbcType=VARCHAR} and  order_state = #{orderState,jdbcType=INTEGER}
+	</select>
+	<select id="selectByTicketNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * from use_order where ticket_no = #{ticketNo,jdbcType=VARCHAR}
+	</select>
+	
+	<update id="updateByTicketNo" parameterType="com.xunqi.pojo.UseOrder" >
+    update use_order
+    <set >
+      <if test="activityId != null" >
+        activity_id = #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="useId != null" >
+        use_id = #{useId,jdbcType=VARCHAR},
+      </if>
+      <if test="activityTitle != null" >
+        activity_title = #{activityTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="orderForm != null" >
+        order_form = #{orderForm,jdbcType=VARCHAR},
+      </if>
+      <if test="ticket != null" >
+        ticket = #{ticket,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketInfo != null" >
+        ticket_info = #{ticketInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketState != null" >
+        ticket_state = #{ticketState,jdbcType=INTEGER},
+      </if>
+      <if test="orderState != null" >
+        order_state = #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where  ticket_no = #{ticketNo,jdbcType=VARCHAR}
+  </update>
+</mapper>
