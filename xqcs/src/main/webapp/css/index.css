@@ -257,18 +257,109 @@ li .text-box .text{
 
 /* join */
 .join-box{
-	background-color: #f6f8f9;
+	height: 947px;
+	background: #D2DAE4 url(../image/002.jpg) center center no-repeat;
+	background-size: cover;
 	overflow: hidden;
+}
+.join-box .title{
+	width: 322px;
+    height: 71px;
+    background: url(../image/join-title.png) center center no-repeat;
+    background-size: contain;
+	margin: 100px auto 0;
 }
 .join-box .box{
 	text-align: center;
 	width: 1200px;
-	height: 918px;
+	height: 947px;
 	overflow: hidden;
-	background: url(../image/join.jpg) center center no-repeat;
+}
+.join-box .slide-box{
+	width: 762px;
+	height: 374px;
+	position: absolute;
+	right: 50px;
+	top: 280px;
+	border: 35px solid #29AEE7;
+	border-left: none;
+	z-index: 5;
+	border-radius: 5px;
+}
+.join-box .swiper-container{
+	width: 1055px;
+	height: 630px;
+	margin-left: 60px;
+}
+.slide-content{
+	position: absolute;
+	top: 144px;
+	left:0;
+	width: 681px;
+	height: 374px;
+	background-color: #fff;
+	text-align: left;
+}
+.slide-img{
+	position: absolute;
+	top: 144px;
+	right: 0;
+	width: 374px;
+	height: 374px;
+}
+.swiper-button-next,.swiper-button-prev{ 
+	border: none;
+	outline: none;
+}
+.swiper-button-next{
+	right: 0;
+	background: url(../image/right.png) center center no-repeat;
 	background-size: contain;
 }
-
+.swiper-button-prev{
+	left: 0;
+	background: url(../image/left.png) center center no-repeat;
+	background-size: contain;
+}
+.swiper-pagination-bullet{
+	width: 13px;
+	height: 13px;
+	background-color: #fff;	
+	opacity: 1;
+}
+.swiper-pagination-bullet-active{
+	background-color: #29AEE7;
+}
+.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet{
+	margin: 0 7px;
+}
+.flex{
+	display: flex;
+	align-items: center;
+	padding-left: 44px;
+	
+}
+.title1{
+	font-size: 22px;
+	font-weight: 500;
+	padding:20px 0 20px 44px;
+}
+.title2{
+	font-size: 30px;
+	font-weight: 500;
+	padding:0 0 20px 44px;
+}
+.flex div{
+	width: 290px;
+	margin-right: 42px;
+	font-size: 16px;
+	line-height: 1.6;
+	font-weight: 400;
+	color: #666666;
+}
+.flex .right{
+	margin: 0
+}
 /* partner */
 .partner-box .title{
 	width: 322px;

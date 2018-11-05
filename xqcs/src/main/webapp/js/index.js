@@ -1,20 +1,9 @@
 
 $(document).ready(function() {
-
+	setScroll();
 	$(window).scroll(function(e){
-		var winHeight = $(window).scrollTop();
-		// console.log(winHeight)
-		if(winHeight>76){
-			$('.nav-bar').addClass('scroll');
-		}else{
-			$('.nav-bar').removeClass('scroll');
-		};
-		// //显示隐藏回到顶部
-		// if(winHeight>900){
+		setScroll();
 
-		// }else{
-
-		// }
 	});
 
 	$('#submit').click(function(){
@@ -54,12 +43,21 @@ $(document).ready(function() {
 	});
 	if($('#txtbox')){
 		$('#txtbox').myScroll({
-			speed: 30, //数值越大，速度越慢
+			speed: 20, //数值越大，速度越慢
 			rowHeight: 40 //li的高度
 		});
 	}
 	
 });
+
+function setScroll(){
+	var winHeight = $(window).scrollTop();
+	if(winHeight>76){
+		$('.nav-bar').addClass('scroll');
+	}else{
+		$('.nav-bar').removeClass('scroll');
+	};
+}
 
 function isEmpty(txt){
 	return txt.match(/^\s*$/);
