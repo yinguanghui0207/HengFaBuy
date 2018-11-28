@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunqi.mapper.TokenMapper" >
+  <resultMap id="BaseResultMap" type="com.xunqi.pojo.Token" >
+    <id column="token_type" property="tokenType" jdbcType="INTEGER" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <update id="updateByPrimaryKey" parameterType="com.xunqi.pojo.Token" >
+    update ass_token
+    set token = #{token,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where token_type = 1
+  </update>
+  <select id="findToken">
+  select token from ass_token where   token_type = 1
+  
+  
+  </select>
+</mapper>

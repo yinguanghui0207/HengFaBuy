@@ -2,6 +2,7 @@ package com.xunqi.tool;
 
 import java.io.*;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 import org.apache.commons.logging.Log;
@@ -29,7 +30,8 @@ public class OssClienUtils {
   private String bucketName = "juhui123";
   
   //文件存储目录    (上传时在key前面加上目录 默认创建)
-  private String date = "jh-upload/";
+  private String path = "jh-upload/";
+  private String date= "jh-upload/"+new SimpleDateFormat("yyyy/MM/dd").format(new Date())+"/";
   
  
   private OSSClient ossClient;
@@ -81,7 +83,7 @@ public class OssClienUtils {
     try {
       InputStream inputStream = file.getInputStream();
       this.uploadFile2OSS(inputStream, name);
-      return name;
+      return date+name;
     } catch (Exception e) {
       throw new Exception("图片上传失败");
     }
@@ -106,8 +108,14 @@ public class OssClienUtils {
       objectMetadata.setContentEncoding("utf-8");
       objectMetadata.setContentType(getcontentType(fileName.substring(fileName.lastIndexOf("."))));
       objectMetadata.setContentDisposition("inline;filename=" + fileName);
+      
       //上传文件
-      PutObjectResult putResult = ossClient.putObject(bucketName, date + fileName, instream, objectMetadata);
+      
+      File dir = new File(date); 
+		if(!dir.exists()){	
+			dir.mkdirs();	
+		}
+      PutObjectResult putResult = ossClient.putObject(bucketName, date+fileName, instream, objectMetadata);
       ret = putResult.getETag();
     } catch (IOException e) {
       log.error(e.getMessage(), e);
@@ -228,7 +236,7 @@ public class OssClienUtils {
    * 删除单个文件
    */
   public void delFile(String key){
-      ossClient.deleteObject(bucketName,date+key);
+      ossClient.deleteObject(bucketName,path+key);
   }
   
 }

@@ -41,4 +41,29 @@ public interface XqActivityMapper {
 	List<XqActivity> selectByActivityIdList(@Param("activityIdList")List<Integer> activityIdList);
 
 	int updateApplicantsNumByActivityId(Integer activityId);
+
+	List<XqActivity> selectActivityByState(@Param("state")Integer state);
+
+	int updateActivityState(XqActivity xqActivity);
+	/**
+	 * 根据经纬度查询附近距离
+	 * @param xqActivity
+	 * @return
+	 */
+	List<XqActivity> findByRange(@Param("record") XqActivity record, @Param("example") XqActivityExample example);
+
+	List<XqActivity> findActivitySearch1(@Param("record") XqActivity record, @Param("example") XqActivityExample example);
+	
+	List<XqActivity> findActivitySearch3(@Param("record") XqActivity record, @Param("example") XqActivityExample example);
+	
+	List<XqActivity> findActivitySearch4(@Param("record") XqActivity record, @Param("example") XqActivityExample example);
+
+	List<XqActivity> findActivityMoney(@Param("record") XqActivity record, @Param("example") XqActivityExample example);
+	
+	List<XqActivity> findActivityTime(@Param("record") XqActivity record, @Param("example") XqActivityExample example);
+
+	int updateTaskState();
+	
+	
+	
 }

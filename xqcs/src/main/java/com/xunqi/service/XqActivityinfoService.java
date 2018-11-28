@@ -1,5 +1,7 @@
 package com.xunqi.service;
 
+import java.util.List;
+
 import com.xunqi.pojo.Data;
 import com.xunqi.pojo.XqActivityinfo;
 
@@ -29,5 +31,15 @@ public interface XqActivityinfoService {
 	 * @param imei
 	 */
 	void updateRelayNum(XqActivityinfo xqActivityinfo);
+	/**
+	 * 需审核的活动 
+	 * @return
+	 */
+	List<Data> findReviewActivity(Integer state);
+	/**
+	 * 查询token
+	 * @return
+	 */
+	String getToken();
 
 }

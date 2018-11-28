@@ -10,7 +10,7 @@ public interface ActivityMerchantMapper {
 
     int deleteByExample(ActivityMerchantExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer merchantId);
 
     int insert(ActivityMerchant record);
 
@@ -18,7 +18,7 @@ public interface ActivityMerchantMapper {
 
     List<ActivityMerchant> selectByExample(ActivityMerchantExample example);
 
-    ActivityMerchant selectByPrimaryKey(Integer id);
+    ActivityMerchant selectByPrimaryKey(Integer merchantId);
 
     int updateByExampleSelective(@Param("record") ActivityMerchant record, @Param("example") ActivityMerchantExample example);
 
@@ -27,6 +27,6 @@ public interface ActivityMerchantMapper {
     int updateByPrimaryKeySelective(ActivityMerchant record);
 
     int updateByPrimaryKey(ActivityMerchant record);
-    
-    ActivityMerchant selectByActivityId(Integer activityId);
+
+	List<ActivityMerchant> selectByState(int state);
 }

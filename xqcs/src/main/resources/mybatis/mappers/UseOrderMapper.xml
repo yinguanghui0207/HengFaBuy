@@ -347,6 +347,23 @@
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where  ticket_no = #{ticketNo,jdbcType=VARCHAR}
+    where  ticket_no = #{ticketNo,jdbcType=VARCHAR} 
   </update>
+	 <update id="updateTaskState" >
+    UPDATE use_order  SET order_state = 2 WHERE activity_id IN (SELECT a.activity_id FROM 
+    (SELECT activity_id  FROM xq_activity WHERE 
+	(state = 1 AND unix_timestamp(NOW()) BETWEEN unix_timestamp(start_time) AND unix_timestamp(end_time))
+	)a )  
+  </update>
+	<update id="updateTaskOrderState"  >
+     UPDATE use_order  SET 
+    order_state = 3 
+  
+     ,ticket_state = 1
+   
+    WHERE activity_id IN (SELECT a.activity_id FROM 
+    (SELECT activity_id  FROM xq_activity WHERE 
+    (state = 2 AND unix_timestamp(NOW()) >  unix_timestamp(end_time))
+	)a )  
+  </update> 
 </mapper>

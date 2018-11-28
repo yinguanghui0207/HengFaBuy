@@ -21,6 +21,20 @@ public class ActivityUsr {
 
     private Date updateTime;
 
+    private String password;
+
+    private String phone;
+
+    private String account;
+
+    private String isAuth;
+
+    private Integer isWx;
+
+    private String isCompany;
+    
+    private String recommendId;
+
     public Integer getId() {
         return id;
     }
@@ -92,4 +106,60 @@ public class ActivityUsr {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account == null ? null : account.trim();
+    }
+
+    public String getIsAuth() {
+        return isAuth;
+    }
+
+    public void setIsAuth(String isAuth) {
+        this.isAuth = isAuth == null ? null : isAuth.trim();
+    }
+
+    public Integer getIsWx() {
+        return isWx;
+    }
+
+    public void setIsWx(Integer isWx) {
+        this.isWx = isWx;
+    }
+
+    public String getIsCompany() {
+        return isCompany;
+    }
+
+    public void setIsCompany(String isCompany) {
+        this.isCompany = isCompany == null ? null : isCompany.trim();
+    }
+
+	public String getRecommendId() {
+		return recommendId;
+	}
+
+	public void setRecommendId(String recommendId) {
+		this.recommendId = recommendId;
+	}
 }

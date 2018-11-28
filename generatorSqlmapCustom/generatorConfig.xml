@@ -11,7 +11,7 @@
 		</commentGenerator>
 		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://47.105.82.94:3306/jhActivity" userId="root"
+			connectionURL="jdbc:mysql://localhost:3306/xqjh" userId="root"
 			password="root">
 		</jdbcConnection>
 
@@ -46,8 +46,8 @@
 		<!-- <table tableName="items"></table>
 		<table tableName="orders"></table>
 		<table tableName="orderdetail"></table> -->
-		<table tableName="xq_activity"></table>
 	
+		<table tableName="banner"></table>
 		
 		<!-- 有些表的字段需要指定java类型
 		 <table schema="" tableName="">

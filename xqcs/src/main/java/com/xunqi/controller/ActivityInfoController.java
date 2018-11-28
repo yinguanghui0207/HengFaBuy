@@ -6,13 +6,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.xunqi.pojo.ActivityCollection;
-import com.xunqi.pojo.ActivityMerchant;
 import com.xunqi.pojo.ActivityUsr;
 import com.xunqi.pojo.Data;
 import com.xunqi.pojo.UseOrder;
 import com.xunqi.pojo.XqActivity;
 import com.xunqi.pojo.XqActivityinfo;
-import com.xunqi.service.ActivityMerchantService;
+
 import com.xunqi.service.ActivityUsrService;
 import com.xunqi.service.ActivitycollectionService;
 import com.xunqi.service.UseOrderService;
@@ -25,8 +24,6 @@ import com.xunqi.tool.ReturnResult;
 public class ActivityInfoController {	
 	@Autowired
 	private XqActivityinfoService xqActivityinfoService;	
-	@Autowired
-	private ActivityMerchantService activityMerchantService;
 	@Autowired
 	private ActivitycollectionService activitycollectionService;
 	@Autowired
@@ -52,25 +49,7 @@ public class ActivityInfoController {
 			return ReturnResult.error("01",e.getMessage());
 		}
 	}
-	
-	/**
-	 * 根据活动Id获取商家信息
-	 * @param activityId
-	 * @return
-	 */
-	@RequestMapping("/activityMerchantview")
-	@ResponseBody
-	public ReturnResult ActivityMerchantview(@RequestBody ActivityMerchant activityMerchant){
-		try {
-			ActivityMerchant Merchants = activityMerchantService.findByActivityId(activityMerchant.getActivityId());
-			
-			return ReturnResult.success(Merchants);
-		} catch (Exception e) {
-			e.getMessage();
-			return ReturnResult.error();
-		}
-	}
-	
+		
 	/**
 	 * 查询活动发布者信息
 	 * @param xqActivityinfo

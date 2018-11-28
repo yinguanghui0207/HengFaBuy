@@ -2,7 +2,6 @@ package com.xunqi.service;
 
 import com.xunqi.pojo.ActivityInfo;
 
-
 public interface ActivityInfoService {
 	
 	/**
@@ -19,6 +18,7 @@ public interface ActivityInfoService {
 	 * @return
 	 */
 	ActivityInfo selectByActivityId(Integer activityId);
+	
 	
 
 }

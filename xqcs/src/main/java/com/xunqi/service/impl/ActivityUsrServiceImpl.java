@@ -6,7 +6,11 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xunqi.mapper.ActivityUsrMapper;
+import com.xunqi.mapper.RecommendMapper;
 import com.xunqi.pojo.ActivityUsr;
+import com.xunqi.pojo.ActivityUsrExample;
+import com.xunqi.pojo.Recommend;
+import com.xunqi.pojo.UserIdentity;
 import com.xunqi.service.ActivityUsrService;
 import com.xunqi.tool.HttpClientConnectionManager;
 import com.xunqi.tool.ReturnResult;
@@ -14,6 +18,8 @@ import com.xunqi.tool.ReturnResult;
 public class ActivityUsrServiceImpl implements ActivityUsrService{
 	@Autowired
 	private ActivityUsrMapper activityUsrMapper;
+	@Autowired
+	private RecommendMapper recommendMapper;
 	@Override
 	public ReturnResult insert(ActivityUsr activityUsr) {
 		//生成useId
@@ -41,7 +47,15 @@ public class ActivityUsrServiceImpl implements ActivityUsrService{
   			{
   			return  ReturnResult.success(1, activityUsr, "00", "用户已存在");
   		}
-		
+  		//添加联系人
+  		if(!(activityUsr.getRecommendId()==null|| "".equals(activityUsr.getRecommendId()))){
+  			Recommend record = new Recommend();
+  			record.setUserid(activityUsr.getUseId());
+  			record.setRecommendid(activityUsr.getRecommendId());
+  			recommendMapper.insertSelective(record);
+  		}
+  		
+		activityUsr.setCreateTime(new Date());
 		activityUsrMapper.insertSelective(activityUsr);
 		
 		return ReturnResult.success(activityUsr);
@@ -56,6 +70,16 @@ public class ActivityUsrServiceImpl implements ActivityUsrService{
 	public ActivityUsr findByUseId(String useId) {
 		
 		return activityUsrMapper.selectByUseId(useId);
+	}
+	@Override
+	public int updatePassword(UserIdentity userIdentity) {
+		ActivityUsrExample activityUsrExample = new ActivityUsrExample();
+		ActivityUsrExample.Criteria  criteria= activityUsrExample.createCriteria();
+		criteria.andPhoneEqualTo(userIdentity.getIdentifier());
+		ActivityUsr activityUsr = new ActivityUsr();
+		activityUsr.setPassword(userIdentity.getPassword());
+		activityUsr.setUpdateTime(new Date());
+		return activityUsrMapper.updateByExampleSelective(activityUsr, activityUsrExample);
 	}
 
 }

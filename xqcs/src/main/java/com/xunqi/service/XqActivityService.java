@@ -35,5 +35,42 @@ public interface XqActivityService {
 	 * @return
 	 */
 	XqActivity findByActivityId(Integer activityId);
+	/**
+	 * 修改活动状态
+	 * @param xqActivity
+	 * @return
+	 */
+	int updateActivityState(XqActivity xqActivity);
+	/**
+	 * 根据经纬度查询活动
+	 * @param xqActivity
+	 * @return
+	 */
+	List<XqActivity> findActivityListByRange(XqActivity xqActivity);
+	/**
+	 * 根据活动的类型查询活动
+	 * @param xqActivity
+	 * @return
+	 */
+	List<XqActivity> findActivityListByType(XqActivity xqActivity);
+	/**
+	 * 根据活动的等级查询活动
+	 * @param xqActivity
+	 * @return
+	 */
+	List<XqActivity> findActivityListByLevel(XqActivity xqActivity);
+	/**
+	 * 查询报名中进行中的活动
+	 * @param xqActivity
+	 * @return
+	 */
+	List<XqActivity> ActivityListAll(XqActivity xqActivity);
+	
+	/**
+	 * 关键字查询活动列表
+	 * @param xqActivity
+	 * @return
+	 */
+	List<XqActivity> ActivitySearch(XqActivity xqActivity);
 
 }

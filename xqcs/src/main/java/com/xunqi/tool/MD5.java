@@ -2,6 +2,8 @@ package com.xunqi.tool;
 
 import java.security.MessageDigest;
 
+import org.apache.shiro.crypto.hash.Md5Hash;
+
 /**
  * User: rizenguo
  * Date: 2014/10/23
@@ -55,6 +57,22 @@ public class MD5 {
         }
         return resultString;
     }
-
+    
+public static void main(String[] args) {
+		
+		/**
+		 * source: 明文
+		 * salt:   盐
+		 * hashIterations  哈希的次数
+		 */
+		
+		Md5Hash md5Hash = new Md5Hash("root", "root", 3);
+		System.out.println(md5Hash.toString());
+	}
+	
+	public static String getMd5HashPasswod(String password){
+		
+		return new Md5Hash(password,"xunqi",3).toString();
+	}
 }
 

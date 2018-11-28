@@ -27,10 +27,16 @@ public interface ActivityUsrMapper {
     int updateByPrimaryKeySelective(ActivityUsr record);
 
     int updateByPrimaryKey(ActivityUsr record);
-
-	ActivityUsr selectByUseId(String useId);
-
-	ActivityUsr selectByPortrait(String portrait);
+    
+   int updateByUseIdSelective(ActivityUsr record);
+    
+    ActivityUsr selectByPortrait(String portrait);
 
 	List<ActivityUsr> selectByUserIdList(@Param("useIdList")List<String>useIdList);
+	
+	List<ActivityUsr> selectPhone(String isCompany);
+	
+	ActivityUsr selectByUseId(String useId);
+	
+	
 }

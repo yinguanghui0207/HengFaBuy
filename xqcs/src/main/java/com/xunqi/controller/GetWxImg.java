@@ -21,6 +21,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.xunqi.pojo.WxCode;
 import com.xunqi.service.XqActivityinfoService;
+import com.xunqi.service.impl.TaskTokenService;
 import com.xunqi.tool.AgentDTO;
 import com.xunqi.tool.AgentReqView;
 import com.xunqi.tool.HttpClientConnectionManager;
@@ -134,7 +135,9 @@ public class GetWxImg {
 		}else{
 			xqActivityinfoService.insertQrcode(imei);
 		}
-		String access_token =getAccessToken();
+//		String access_token =getAccessToken();
+		
+		 String access_token = xqActivityinfoService.getToken();
 		
 		
          
@@ -180,7 +183,7 @@ public class GetWxImg {
 	
  
 	
-    public String getAccessToken() {
+/*    public String getAccessToken() {
         try {
         	String appId ="wx8d167b0362172830";
         	String appsecret ="031576620752be50bc76479874791205";
@@ -194,7 +197,7 @@ public class GetWxImg {
             e.printStackTrace();
             return "获取失败";
         }
-    }
+    }*/
 
 
      /**

@@ -27,10 +27,14 @@ public class XqActivity {
     private BigDecimal lat;
 
     private String activityType;
+    
+    private Integer activityLevel;
 
     private Integer applicantsNum;
 
     private Integer state;
+    
+    private String failMassage;
 
     private String activityTime;
 
@@ -45,6 +49,11 @@ public class XqActivity {
     private Date createTime;
 
     private Date updateTime;
+   
+    //添加字段
+    private BigDecimal ranges;
+    
+    private Integer page;
 
     public Integer getId() {
         return id;
@@ -213,4 +222,36 @@ public class XqActivity {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+	public String getFailMassage() {
+		return failMassage;
+	}
+
+	public void setFailMassage(String failMassage) {
+		this.failMassage = failMassage;
+	}
+
+	public BigDecimal getrangess() {
+		return ranges;
+	}
+
+	public void setranges(BigDecimal ranges) {
+		this.ranges = ranges;
+	}
+
+	public Integer getActivityLevel() {
+		return activityLevel;
+	}
+
+	public void setActivityLevel(Integer activityLevel) {
+		this.activityLevel = activityLevel;
+	}
+
+	public Integer getPage() {
+		return page;
+	}
+
+	public void setPage(Integer page) {
+		this.page = page;
+	}
 }

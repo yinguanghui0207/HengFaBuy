@@ -11,6 +11,12 @@
     <result column="introduction" property="introduction" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="is_auth" property="isAuth" jdbcType="VARCHAR" />
+    <result column="is_wx" property="isWx" jdbcType="INTEGER" />
+    <result column="is_company" property="isCompany" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -72,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, use_id, portrait, nickname, fan_num, activity_num, introduction, create_time, 
-    update_time
+    update_time, password, phone, account, is_auth, is_wx, is_company
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xunqi.pojo.ActivityUsrExample" >
     select
@@ -107,11 +113,15 @@
   <insert id="insert" parameterType="com.xunqi.pojo.ActivityUsr" >
     insert into activity_usr (id, use_id, portrait, 
       nickname, fan_num, activity_num, 
-      introduction, create_time, update_time
+      introduction, create_time, update_time, 
+      password, phone, account, 
+      is_auth, is_wx, is_company
       )
     values (#{id,jdbcType=INTEGER}, #{useId,jdbcType=VARCHAR}, #{portrait,jdbcType=VARCHAR}, 
       #{nickname,jdbcType=VARCHAR}, #{fanNum,jdbcType=INTEGER}, #{activityNum,jdbcType=INTEGER}, 
-      #{introduction,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      #{introduction,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
+      #{isAuth,jdbcType=VARCHAR}, #{isWx,jdbcType=INTEGER}, #{isCompany,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.xunqi.pojo.ActivityUsr" >
@@ -144,6 +154,24 @@
       <if test="updateTime != null" >
         update_time,
       </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="isAuth != null" >
+        is_auth,
+      </if>
+      <if test="isWx != null" >
+        is_wx,
+      </if>
+      <if test="isCompany != null" >
+        is_company,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -172,6 +200,24 @@
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="isAuth != null" >
+        #{isAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="isWx != null" >
+        #{isWx,jdbcType=INTEGER},
+      </if>
+      <if test="isCompany != null" >
+        #{isCompany,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -211,6 +257,24 @@
       <if test="record.updateTime != null" >
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.account != null" >
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAuth != null" >
+        is_auth = #{record.isAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isWx != null" >
+        is_wx = #{record.isWx,jdbcType=INTEGER},
+      </if>
+      <if test="record.isCompany != null" >
+        is_company = #{record.isCompany,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -226,12 +290,110 @@
       activity_num = #{record.activityNum,jdbcType=INTEGER},
       introduction = #{record.introduction,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      password = #{record.password,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      account = #{record.account,jdbcType=VARCHAR},
+      is_auth = #{record.isAuth,jdbcType=VARCHAR},
+      is_wx = #{record.isWx,jdbcType=INTEGER},
+      is_company = #{record.isCompany,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xunqi.pojo.ActivityUsr" >
+    update activity_usr
+    <set >
+      <if test="useId != null" >
+        use_id = #{useId,jdbcType=VARCHAR},
+      </if>
+      <if test="portrait != null" >
+        portrait = #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="fanNum != null" >
+        fan_num = #{fanNum,jdbcType=INTEGER},
+      </if>
+      <if test="activityNum != null" >
+        activity_num = #{activityNum,jdbcType=INTEGER},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="isAuth != null" >
+        is_auth = #{isAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="isWx != null" >
+        is_wx = #{isWx,jdbcType=INTEGER},
+      </if>
+      <if test="isCompany != null" >
+        is_company = #{isCompany,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunqi.pojo.ActivityUsr" >
+    update activity_usr
+    set use_id = #{useId,jdbcType=VARCHAR},
+      portrait = #{portrait,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      fan_num = #{fanNum,jdbcType=INTEGER},
+      activity_num = #{activityNum,jdbcType=INTEGER},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      is_auth = #{isAuth,jdbcType=VARCHAR},
+      is_wx = #{isWx,jdbcType=INTEGER},
+      is_company = #{isCompany,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPortrait" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    *
+    from activity_usr
+    where portrait = #{portrait,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByUserIdList" resultMap="BaseResultMap" parameterType="java.util.List">
+    SELECT *
+    FROM activity_usr 
+    WHERE  use_id in <foreach collection="useIdList" item="useId" open="(" close=")" separator=",">
+    #{useId,jdbcType=VARCHAR}
+   </foreach>
+</select>
+  
+  <select id="selectPhone" resultMap="BaseResultMap" parameterType="com.xunqi.pojo.ActivityUsr" >
+    select nickname,phone from activity_usr where is_company = #{isCompany,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="selectByUseId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    *
+    from activity_usr
+    where use_id = #{useId,jdbcType=VARCHAR}
+  </select>
+  
+   <update id="updateByUseIdSelective" parameterType="com.xunqi.pojo.ActivityUsr" >
     update activity_usr
     <set >
       <if test="portrait != null" >
@@ -255,40 +417,25 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="isAuth != null" >
+        is_auth = #{isAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="isWx != null" >
+        is_wx = #{isWx,jdbcType=INTEGER},
+      </if>
+      <if test="isCompany != null" >
+        is_company = #{isCompany,jdbcType=VARCHAR},
+      </if>
     </set>
-    where use_id = #{useId,jdbcType=VARCHAR}
+    where use_id = #{useId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.xunqi.pojo.ActivityUsr" >
-    update activity_usr
-    set use_id = #{useId,jdbcType=VARCHAR},
-      portrait = #{portrait,jdbcType=VARCHAR},
-      nickname = #{nickname,jdbcType=VARCHAR},
-      fan_num = #{fanNum,jdbcType=INTEGER},
-      activity_num = #{activityNum,jdbcType=INTEGER},
-      introduction = #{introduction,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  
-   <select id="selectByUseId" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    *
-    from activity_usr
-    where use_id = #{useId,jdbcType=VARCHAR}
-  </select>
-   <select id="selectByPortrait" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    *
-    from activity_usr
-    where portrait = #{portrait,jdbcType=VARCHAR}
-  </select>
-  
-  <select id="selectByUserIdList" resultMap="BaseResultMap" parameterType="java.util.List">
-    SELECT *
-    FROM activity_usr 
-    WHERE  use_id in <foreach collection="useIdList" item="useId" open="(" close=")" separator=",">
-    #{useId,jdbcType=VARCHAR}
-   </foreach>
-</select>
 </mapper>

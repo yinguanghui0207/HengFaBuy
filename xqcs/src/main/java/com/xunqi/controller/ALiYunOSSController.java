@@ -3,12 +3,15 @@ package com.xunqi.controller;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.xunqi.pojo.PicUploadResult;
+import com.xunqi.pojo.XqActivity;
 import com.xunqi.tool.OssClienUtils;
+import com.xunqi.tool.ReturnResult;
 	@Controller
 	@RequestMapping("/aly/aliyun")
 	public class ALiYunOSSController {
@@ -49,6 +52,24 @@ import com.xunqi.tool.OssClienUtils;
 			}
 	    	return result;
 	    }	    
-	   
+	    /**
+		 * 删除图片
+		 * @param xqActivity
+		 * @return
+		 */
+		 @RequestMapping("/deleteSingleObect")
+		    @ResponseBody
+		    public  ReturnResult deleteSingleObect(@RequestBody XqActivity xqActivity) {
+		        //创建OSSClient实例
+		    	OssClienUtils ossClient = new OssClienUtils();
+		        try {
+		            ossClient.delFile( xqActivity.getCover());
+		            return ReturnResult.success();
+		        } catch (Exception e) {	            
+		        	return ReturnResult.error("01",e.getMessage());
+		        } finally {
+		        	ossClient.destory();// 关闭client
+		        }
+		    }	
 	}
 

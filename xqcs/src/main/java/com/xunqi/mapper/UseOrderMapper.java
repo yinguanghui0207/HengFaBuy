@@ -37,4 +37,14 @@ public interface UseOrderMapper {
 	UseOrder selectByTicketNo(String ticketNo);
 
 	int updateByTicketNo(UseOrder useOrder);
+	/**
+	 * 更改订单状态为2
+	 * @return
+	 */
+	int updateTaskState();
+	/**
+	 * 更改订单状态为3和票的状态为1
+	 * @return
+	 */
+	int updateTaskOrderState();
 }

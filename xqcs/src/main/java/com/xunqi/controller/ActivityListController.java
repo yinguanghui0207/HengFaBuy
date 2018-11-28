@@ -23,7 +23,7 @@ public class ActivityListController {
 	private UseOrderService useOrderService; 
 	
 	/**
-	 * 查询所有活动列表
+	 * 查询所有活动列表(状态大于0  即活动报名 进行中)
 	 * @return
 	 */
 	@RequestMapping("/activityList")
@@ -39,7 +39,7 @@ public class ActivityListController {
 			
 			return ReturnResult.error("01",e.getMessage());
 		}
-	}
+	}	
 	
 	/**
 	 * 根据地址查询
@@ -73,7 +73,12 @@ public class ActivityListController {
 			
 			return ReturnResult.error("01",e.getMessage());
 		}
-	}	
+	}
+	/**
+	 * 验票
+	 * @param useOrder
+	 * @return
+	 */
 	@RequestMapping("/checkEWM")
 	@ResponseBody
 	public ReturnResult CheckEWM(@RequestBody UseOrder useOrder){		
@@ -96,6 +101,89 @@ public class ActivityListController {
 			
 			return ReturnResult.error("01",e.getMessage());
 		}
-	}		
-}
+	}
+/*************************************************************************************************************************************************************************/	
+	/**
+	 * 查询附近活动
+	 * @param xqActivity
+	 * @return
+	 */
+	@RequestMapping("/ActivityListByRange")
+	@ResponseBody
+	public ReturnResult ActivityListByRange(@RequestBody XqActivity xqActivity){		
+		try {
+			List<XqActivity> activity = xqActivityService.findActivityListByRange(xqActivity);
+				return ReturnResult.success(activity.size(),activity);
+			}catch (Exception e) {				
+				return ReturnResult.error("01",e.getMessage());
+			}
 
+	}
+	
+	/**
+	 * 分类查询活动
+	 * @param xqActivity
+	 * @return
+	 */ 
+	@RequestMapping("/ActivityListByType")
+	@ResponseBody
+	public ReturnResult ActivityListByType(@RequestBody XqActivity xqActivity){		
+		try {
+			List<XqActivity> activity = xqActivityService.findActivityListByType(xqActivity);
+				return ReturnResult.success(activity.size(),activity);
+			}catch (Exception e) {				
+				return ReturnResult.error("01",e.getMessage());
+			}
+
+	}
+	/**
+	 * 强力推荐活动查询
+	 * @param xqActivity
+	 * @return
+	 */
+	@RequestMapping("/ActivityListByLevel")
+	@ResponseBody
+	public ReturnResult ActivityListByLevel(){		
+		try {
+			XqActivity xqActivity = new XqActivity();
+			xqActivity.setActivityLevel(8);
+			List<XqActivity> activity = xqActivityService.findActivityListByLevel(xqActivity);
+				return ReturnResult.success(activity.size(),activity);
+			}catch (Exception e) {				
+				return ReturnResult.error("01",e.getMessage());
+			}
+
+	}
+	/**
+	 * 精选活动
+	 * @param xqActivity
+	 * @return
+	 */
+	@RequestMapping("/ActivityListAll")
+	@ResponseBody
+	public ReturnResult ActivityListAll(@RequestBody XqActivity xqActivity){		
+		try {
+			List<XqActivity> activity = xqActivityService.ActivityListAll(xqActivity);
+				return ReturnResult.success(activity.size(),activity);
+			}catch (Exception e) {				
+				return ReturnResult.error("01",e.getMessage());
+			}
+
+	}
+	/**
+	 *搜索 
+	 *@param id activityTitle lat lng 
+	 * @return
+	 */
+	@RequestMapping("/activitySearch")
+	@ResponseBody
+	public ReturnResult ActivitySearch(@RequestBody XqActivity xqActivity){		
+		try {
+		List<XqActivity> activity = xqActivityService.ActivitySearch(xqActivity);
+			return ReturnResult.success(activity.size(),activity);
+		} catch (Exception e) {			
+			return ReturnResult.error("01",e.getMessage());
+		}
+	}
+	
+}
