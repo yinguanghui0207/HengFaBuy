@@ -1,5 +1,7 @@
 package com.xunqi.service;
 
+import java.util.List;
+
 import com.xunqi.pojo.ActivityUsr;
 import com.xunqi.pojo.UserIdentity;
 import com.xunqi.tool.ReturnResult;
@@ -27,6 +29,12 @@ public interface ActivityUsrService {
 	 * 修改密码（根据手机号修改密码）
 	 * @param userIdentity
 	 */
-	int updatePassword(UserIdentity userIdentity);	
+	int updatePassword(UserIdentity userIdentity);
+	/**
+	 * 查询我的推荐人
+	 * @param useId
+	 * @return
+	 */
+	 List<ActivityUsr> FindRecommend(String useId);	
 
 }

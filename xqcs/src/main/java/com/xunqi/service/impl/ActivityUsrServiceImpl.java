@@ -1,6 +1,9 @@
 package com.xunqi.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,7 @@ import com.xunqi.mapper.RecommendMapper;
 import com.xunqi.pojo.ActivityUsr;
 import com.xunqi.pojo.ActivityUsrExample;
 import com.xunqi.pojo.Recommend;
+import com.xunqi.pojo.RecommendExample;
 import com.xunqi.pojo.UserIdentity;
 import com.xunqi.service.ActivityUsrService;
 import com.xunqi.tool.HttpClientConnectionManager;
@@ -47,7 +51,7 @@ public class ActivityUsrServiceImpl implements ActivityUsrService{
   			{
   			return  ReturnResult.success(1, activityUsr, "00", "用户已存在");
   		}
-  		//添加联系人
+  		//添加推荐人
   		if(!(activityUsr.getRecommendId()==null|| "".equals(activityUsr.getRecommendId()))){
   			Recommend record = new Recommend();
   			record.setUserid(activityUsr.getUseId());
@@ -80,6 +84,18 @@ public class ActivityUsrServiceImpl implements ActivityUsrService{
 		activityUsr.setPassword(userIdentity.getPassword());
 		activityUsr.setUpdateTime(new Date());
 		return activityUsrMapper.updateByExampleSelective(activityUsr, activityUsrExample);
+	}
+	@Override
+	public List<ActivityUsr> FindRecommend(String useId) {
+		RecommendExample example = new RecommendExample();
+		RecommendExample.Criteria criteria = example.createCriteria();
+		criteria.andRecommendidEqualTo(useId);
+		List<Recommend> selectByExample = recommendMapper.selectByExample(example);
+		List<ActivityUsr> list = new ArrayList<ActivityUsr>();
+		for (Recommend recommend : selectByExample) {
+		list.add(this.findByUseId(recommend.getUserid()));			
+		}
+		return list;
 	}
 
 }

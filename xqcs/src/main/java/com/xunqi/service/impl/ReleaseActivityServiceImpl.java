@@ -31,12 +31,9 @@ public class ReleaseActivityServiceImpl implements ReleaseActivityService{
 		data.getXqActivity().setActivityId(activityId);
 		data.getXqActivity().setCreateTime(new Date());
 		xqActivityMapper.insertSelective(data.getXqActivity());
-		//插入活动详情信息
-		data.getXqActivityinfo().setActivityId(activityId);
-		data.getXqActivityinfo().setCreateTime(new Date());
-		xqActivityinfoMapper.insertSelective(data.getXqActivityinfo());
 		//活动票设置
 		int total=0;
+		int a =0 ;
 		for(TicketList tricket:data.getTicket()){
 			tricket.setActivityId(activityId);
 			tricket.setTicketId(RandomSixnum.generateCheckPass());
@@ -45,10 +42,16 @@ public class ReleaseActivityServiceImpl implements ReleaseActivityService{
 			//设置活动总票数
 			tricket.setTicketTips(tricket.getTicketNum());
 			 total = total +ticketListMapper.insertSelective(tricket);
+			 a = a+tricket.getTicketNum();
 		}
 		if(data.getTicket().size()!=total){
 			return ReturnResult.error("10001", "活动票设置异常");
 			}
+		//插入活动详情信息
+		data.getXqActivityinfo().setActivityId(activityId);
+		data.getXqActivityinfo().setCreateTime(new Date());		
+		data.getXqActivityinfo().setTotalLimit(a);
+		xqActivityinfoMapper.insertSelective(data.getXqActivityinfo());
 		//大字段插入
 		data.getReleaseString().setActivityId(activityId);
 		releaseStringMapper.insertSelective(data.getReleaseString());

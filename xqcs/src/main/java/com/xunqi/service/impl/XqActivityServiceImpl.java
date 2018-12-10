@@ -169,4 +169,12 @@ public class XqActivityServiceImpl implements XqActivityService{
 		return xqActivityMapper.findActivitySearch1(xqActivity,xqActivityExample);
 	}
 
+	@Override
+	public List<XqActivity> findByActivityIds(List<Integer> ids,int page) {
+		XqActivityExample xqActivityExample = new XqActivityExample();
+		xqActivityExample.setPageNum(page);
+		xqActivityExample.setPageSize(8);
+		return xqActivityMapper.findByActivityIds(ids,xqActivityExample);
+	}
+
 }

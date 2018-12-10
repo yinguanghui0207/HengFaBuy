@@ -12,7 +12,8 @@ public interface ActivityListService {
 	
 	public List<ActivityList> findByAddres(String address) ;
 	
-	public List<ActivityList> findByKeyword(ActivityList activityList); 
+	public List<ActivityList> findByKeyword(ActivityList activityList);
+
 	
 	 
 	

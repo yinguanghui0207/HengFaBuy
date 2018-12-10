@@ -63,6 +63,8 @@ public interface XqActivityMapper {
 	List<XqActivity> findActivityTime(@Param("record") XqActivity record, @Param("example") XqActivityExample example);
 
 	int updateTaskState();
+
+	List<XqActivity> findByActivityIds(@Param("ids") List<Integer> ids, @Param("example") XqActivityExample example);
 	
 	
 	

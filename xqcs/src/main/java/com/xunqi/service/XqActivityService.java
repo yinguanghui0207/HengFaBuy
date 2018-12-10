@@ -72,5 +72,11 @@ public interface XqActivityService {
 	 * @return
 	 */
 	List<XqActivity> ActivitySearch(XqActivity xqActivity);
+	/**
+	 * 根据活动ids查询活动
+	 * @param ids
+	 * @return
+	 */
+	List<XqActivity> findByActivityIds(List<Integer> ids,int page);
 
 }

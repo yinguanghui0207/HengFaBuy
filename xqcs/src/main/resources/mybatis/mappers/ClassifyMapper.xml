@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunqi.mapper.ClassifyMapper" >
+  <resultMap id="BaseResultMap" type="com.xunqi.pojo.Classify" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="classify_type" property="classifyType" jdbcType="INTEGER" />
+    <result column="classify_name" property="classifyName" jdbcType="VARCHAR" />
+    <result column="classify_state" property="classifyState" jdbcType="INTEGER" />
+    <result column="classify_portrait" property="classifyPortrait" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, classify_type, classify_name, classify_state, classify_portrait, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xunqi.pojo.ClassifyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from classify
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.xunqi.pojo.ClassifyExample" >
+    delete from classify
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunqi.pojo.Classify" >
+    insert into classify (id, classify_type, classify_name, 
+      classify_state, classify_portrait, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{classifyType,jdbcType=INTEGER}, #{classifyName,jdbcType=VARCHAR}, 
+      #{classifyState,jdbcType=INTEGER}, #{classifyPortrait,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunqi.pojo.Classify" >
+    insert into classify
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="classifyType != null" >
+        classify_type,
+      </if>
+      <if test="classifyName != null" >
+        classify_name,
+      </if>
+      <if test="classifyState != null" >
+        classify_state,
+      </if>
+      <if test="classifyPortrait != null" >
+        classify_portrait,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="classifyType != null" >
+        #{classifyType,jdbcType=INTEGER},
+      </if>
+      <if test="classifyName != null" >
+        #{classifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyState != null" >
+        #{classifyState,jdbcType=INTEGER},
+      </if>
+      <if test="classifyPortrait != null" >
+        #{classifyPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunqi.pojo.ClassifyExample" resultType="java.lang.Integer" >
+    select count(*) from classify
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update classify
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.classifyType != null" >
+        classify_type = #{record.classifyType,jdbcType=INTEGER},
+      </if>
+      <if test="record.classifyName != null" >
+        classify_name = #{record.classifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classifyState != null" >
+        classify_state = #{record.classifyState,jdbcType=INTEGER},
+      </if>
+      <if test="record.classifyPortrait != null" >
+        classify_portrait = #{record.classifyPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update classify
+    set id = #{record.id,jdbcType=INTEGER},
+      classify_type = #{record.classifyType,jdbcType=INTEGER},
+      classify_name = #{record.classifyName,jdbcType=VARCHAR},
+      classify_state = #{record.classifyState,jdbcType=INTEGER},
+      classify_portrait = #{record.classifyPortrait,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

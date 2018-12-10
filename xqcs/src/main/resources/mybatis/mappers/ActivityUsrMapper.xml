@@ -17,6 +17,8 @@
     <result column="is_auth" property="isAuth" jdbcType="VARCHAR" />
     <result column="is_wx" property="isWx" jdbcType="INTEGER" />
     <result column="is_company" property="isCompany" jdbcType="VARCHAR" />
+    <result column="is_bond" property="isBond" jdbcType="VARCHAR" />
+    <result column="is_member" property="isMember" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -78,7 +80,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, use_id, portrait, nickname, fan_num, activity_num, introduction, create_time, 
-    update_time, password, phone, account, is_auth, is_wx, is_company
+    update_time, password, phone, account, is_auth, is_wx, is_company, is_bond, is_member
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xunqi.pojo.ActivityUsrExample" >
     select
@@ -115,14 +117,14 @@
       nickname, fan_num, activity_num, 
       introduction, create_time, update_time, 
       password, phone, account, 
-      is_auth, is_wx, is_company
-      )
+      is_auth, is_wx, is_company, 
+      is_bond, is_member)
     values (#{id,jdbcType=INTEGER}, #{useId,jdbcType=VARCHAR}, #{portrait,jdbcType=VARCHAR}, 
       #{nickname,jdbcType=VARCHAR}, #{fanNum,jdbcType=INTEGER}, #{activityNum,jdbcType=INTEGER}, 
       #{introduction,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
-      #{isAuth,jdbcType=VARCHAR}, #{isWx,jdbcType=INTEGER}, #{isCompany,jdbcType=VARCHAR}
-      )
+      #{isAuth,jdbcType=VARCHAR}, #{isWx,jdbcType=INTEGER}, #{isCompany,jdbcType=VARCHAR}, 
+      #{isBond,jdbcType=VARCHAR}, #{isMember,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.xunqi.pojo.ActivityUsr" >
     insert into activity_usr
@@ -172,6 +174,12 @@
       <if test="isCompany != null" >
         is_company,
       </if>
+      <if test="isBond != null" >
+        is_bond,
+      </if>
+      <if test="isMember != null" >
+        is_member,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -218,6 +226,12 @@
       </if>
       <if test="isCompany != null" >
         #{isCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="isBond != null" >
+        #{isBond,jdbcType=VARCHAR},
+      </if>
+      <if test="isMember != null" >
+        #{isMember,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -275,6 +289,12 @@
       <if test="record.isCompany != null" >
         is_company = #{record.isCompany,jdbcType=VARCHAR},
       </if>
+      <if test="record.isBond != null" >
+        is_bond = #{record.isBond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isMember != null" >
+        is_member = #{record.isMember,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -296,7 +316,9 @@
       account = #{record.account,jdbcType=VARCHAR},
       is_auth = #{record.isAuth,jdbcType=VARCHAR},
       is_wx = #{record.isWx,jdbcType=INTEGER},
-      is_company = #{record.isCompany,jdbcType=VARCHAR}
+      is_company = #{record.isCompany,jdbcType=VARCHAR},
+      is_bond = #{record.isBond,jdbcType=VARCHAR},
+      is_member = #{record.isMember,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -346,6 +368,12 @@
       <if test="isCompany != null" >
         is_company = #{isCompany,jdbcType=VARCHAR},
       </if>
+      <if test="isBond != null" >
+        is_bond = #{isBond,jdbcType=VARCHAR},
+      </if>
+      <if test="isMember != null" >
+        is_member = #{isMember,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -364,10 +392,12 @@
       account = #{account,jdbcType=VARCHAR},
       is_auth = #{isAuth,jdbcType=VARCHAR},
       is_wx = #{isWx,jdbcType=INTEGER},
-      is_company = #{isCompany,jdbcType=VARCHAR}
+      is_company = #{isCompany,jdbcType=VARCHAR},
+      is_bond = #{isBond,jdbcType=VARCHAR},
+      is_member = #{isMember,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPortrait" resultMap="BaseResultMap" parameterType="java.lang.String" >
+<select id="selectByPortrait" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     *
     from activity_usr

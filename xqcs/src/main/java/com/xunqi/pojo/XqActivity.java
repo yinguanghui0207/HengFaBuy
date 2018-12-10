@@ -3,6 +3,8 @@ package com.xunqi.pojo;
 import java.math.BigDecimal;
 import java.util.Date;
 
+
+/*@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)*/
 public class XqActivity {
     private Integer id;
 

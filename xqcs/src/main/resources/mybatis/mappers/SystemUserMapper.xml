@@ -329,7 +329,7 @@
   </update>
   
   <select id="findoneSystemUser" parameterType="java.lang.String" resultType="java.lang.Integer" >
-   select 1 from system_user where account = #{account,jdbcType=VARCHAR} limit 1;
+   select 1 from system_user where account = #{account,jdbcType=VARCHAR} limit 1
   </select>
   
   <update id="updateState" parameterType="com.xunqi.pojo.SystemUser" >

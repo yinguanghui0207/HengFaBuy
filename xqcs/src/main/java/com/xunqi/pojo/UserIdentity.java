@@ -1,10 +1,5 @@
 package com.xunqi.pojo;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.http.HttpRequest;
-
 import com.alibaba.fastjson.JSONObject;
 
 public class UserIdentity {
@@ -22,9 +17,11 @@ public class UserIdentity {
     
     private String nickname;
     
-    private JSONObject json;
+    private JSONObject info;
     
     private String password;
+    
+    private String vcode;
 
     public Integer getId() {
         return id;
@@ -82,20 +79,28 @@ public class UserIdentity {
 		this.nickname = nickname;
 	}
 
-	public JSONObject getJson() {
-		return json;
-	}
-
-	public void setJson(JSONObject json) {
-		this.json = json;
-	}
-
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public JSONObject getInfo() {
+		return info;
+	}
+
+	public void setInfo(JSONObject info) {
+		this.info = info;
+	}
+
+	public String getVcode() {
+		return vcode;
+	}
+
+	public void setVcode(String vcode) {
+		this.vcode = vcode;
 	}
 
 	

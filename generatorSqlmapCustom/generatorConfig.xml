@@ -47,7 +47,7 @@
 		<table tableName="orders"></table>
 		<table tableName="orderdetail"></table> -->
 	
-		<table tableName="banner"></table>
+		<table tableName="teb_footprint"></table>
 		
 		<!-- 有些表的字段需要指定java类型
 		 <table schema="" tableName="">

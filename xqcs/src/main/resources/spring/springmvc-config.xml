@@ -8,7 +8,8 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- MVC注解驱动 -->
-	<mvc:annotation-driven/>
+	 <mvc:annotation-driven/>
+	
 
 	<!-- 配置扫描器，使得@Controller注解生效 -->
 	<context:component-scan base-package="com.xunqi.controller" />
@@ -31,4 +32,19 @@
 		<property name="defaultEncoding" value="utf-8"/>
 		<property name="maxUploadSize" value="10245760"/>
 	</bean>
+	
+	<!-- 全局配置祛除josn中的null数据-->
+	<!-- <mvc:annotation-driven>
+		<mvc:message-converters>	
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper">
+					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+						<property name="serializationInclusion"> 
+							<value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value> 
+						</property>
+					</bean>
+			</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>  -->
 </beans>

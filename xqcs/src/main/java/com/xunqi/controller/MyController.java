@@ -5,7 +5,6 @@ package com.xunqi.controller;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.fastjson.JSONObject;
 import com.xunqi.pojo.ActivityUsr;
 import com.xunqi.pojo.ReturnData;
 import com.xunqi.pojo.UseOrder;
@@ -25,12 +22,8 @@ import com.xunqi.service.ActivitycollectionService;
 import com.xunqi.service.UseOrderService;
 import com.xunqi.service.UserIdentityService;
 import com.xunqi.service.XqActivityService;
-import com.xunqi.tool.ALMassageUtil;
 import com.xunqi.tool.MD5;
-import com.xunqi.tool.RandomStringGenerator;
 import com.xunqi.tool.ReturnResult;
-import com.xunqi.tool.WXUtil;
-
 @Controller
 @RequestMapping("/use")
 public class MyController {
@@ -147,6 +140,22 @@ public class MyController {
 			return ReturnResult.error("01",e.getMessage());
 		}
 	}
+	/**
+	 * 查询推荐人
+	 * @return
+	 */
+	@RequestMapping("/FindRecommend")
+	@ResponseBody
+	public ReturnResult FindRecommend(@RequestBody ActivityUsr activityUsr){
+		try {
+			List<ActivityUsr> findRecommend = activityUsrService.FindRecommend(activityUsr.getUseId());
+			
+			return ReturnResult.success(findRecommend.size(),findRecommend);
+		} catch (Exception e) {			
+			return ReturnResult.error("01",e.getMessage());
+		}
+	}
+	
 /*************************************************************************************************************************************************************/
 	/**
 	 * 用户登录	
@@ -179,7 +188,7 @@ public class MyController {
 				if(attribute == null){
 					return  ReturnResult.error("05", "验证码已失效，请从新发送验证码");
 				}
-				if(userIdentity.getCredential().equals(attribute)){
+				if(userIdentity.getVcode().equals(attribute)){
 					UserIdentity findUserIdentity = userIdentityService.findUserIdentity(userIdentity);
 					ActivityUsr findByUseId;
 					if(findUserIdentity== null){
@@ -200,7 +209,7 @@ public class MyController {
 				}
 				
 			}else if("WX".equals(userIdentity.getIdentityType())){				
-			 JSONObject json = WXUtil.UtilgetTeskToken("wxdd2aa0d1263b3961", "0ec204a9912a6e142bef08ef5fbcfcc5", userIdentity.getIdentifier());
+			/* JSONObject json = WXUtil.UtilgetTeskToken("wxdd2aa0d1263b3961", "0ec204a9912a6e142bef08ef5fbcfcc5", userIdentity.getIdentifier());
 			 String openid = json.get("openid").toString();
 			 userIdentity.setCredential(openid);
 			 UserIdentity findUserIdentity = userIdentityService.findUserIdentity(userIdentity);
@@ -209,7 +218,16 @@ public class MyController {
 			 }else{
 				 ActivityUsr findByUseId = activityUsrService.findByUseId(findUserIdentity.getUseId());
 				 return ReturnResult.success(findByUseId);
-			 }
+			 }*/
+				
+				UserIdentity findUserIdentity = userIdentityService.findUserIdentity(userIdentity);
+				 if(findUserIdentity == null){
+					 return  ReturnResult.error("10", "由于您是首次登陆，请输入手机号");
+				 }else{
+					 ActivityUsr findByUseId = activityUsrService.findByUseId(findUserIdentity.getUseId());
+					 return ReturnResult.success(findByUseId);
+				 }
+				
 			}
 			return ReturnResult.error("06","未知错误，请重新登录");
 		} catch (Exception e) {			
@@ -228,10 +246,12 @@ public class MyController {
 	@ResponseBody
 	public ReturnResult SendYZMMassage(@RequestBody UserIdentity userIdentity, HttpServletRequest httpRequest){
 		try {
-			String yzm = RandomStringGenerator.getYZM();
+			/*String yzm = RandomStringGenerator.getYZM();
 			
 			System.out.println(yzm);
-			ALMassageUtil.sendMassage(userIdentity.getIdentifier(), "SMS_150770296", "{\"code\":\""+yzm+"\"}");
+			ALMassageUtil.sendMassage(userIdentity.getIdentifier(), "SMS_150770296", "{\"code\":\""+yzm+"\"}");*/
+			
+			String yzm ="123456";
 			HttpSession session = httpRequest.getSession();
 			session.setAttribute("YZM", yzm);
 			
@@ -280,7 +300,7 @@ public class MyController {
 				if(attribute == null){
 					return  ReturnResult.error("05", "验证码已失效，请从新发送验证码");
 				}
-				if(userIdentity.getCredential().equals(attribute)){
+				if(userIdentity.getVcode().equals(attribute)){
 					if(null == userIdentity.getUseId()){
 						
 						this.register(userIdentity);
@@ -301,7 +321,7 @@ public class MyController {
 	}
 	/**
 	 * 绑定微信
-	 * @param userIdentity（手机号 ，json(openid token)，  验证码）
+	 * @param userIdentity（手机号 ，Info，  验证码）
 	 * @return
 	 */
 	@RequestMapping("/UpdateWXNext")
@@ -313,7 +333,7 @@ public class MyController {
 			if(attribute == null){
 				return  ReturnResult.error("05", "验证码已失效，请从新发送验证码");
 			}
-			if(userIdentity.getCredential().equals(attribute)){
+			if(userIdentity.getVcode().equals(attribute)){
 				if(null == userIdentity.getUseId()){					
 					this.register(userIdentity);
 				}else{
@@ -383,6 +403,7 @@ public class MyController {
 			return ReturnResult.error();
 		}
 	}
+	
 	
 }
 

@@ -3,11 +3,8 @@ package com.xunqi.service.impl;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.alibaba.fastjson.JSONObject;
 import com.xunqi.mapper.ActivityUsrMapper;
 import com.xunqi.mapper.UserIdentityMapper;
 import com.xunqi.pojo.ActivityUsr;
@@ -15,7 +12,6 @@ import com.xunqi.pojo.UserIdentity;
 import com.xunqi.pojo.UserIdentityExample;
 import com.xunqi.service.UserIdentityService;
 import com.xunqi.tool.MD5;
-import com.xunqi.tool.WXUtil;
 @Service
 public class UserIdentityServiceImpl implements UserIdentityService {	
 	@Autowired
@@ -47,20 +43,24 @@ public class UserIdentityServiceImpl implements UserIdentityService {
 			
 				ActivityUsr activityUsr = new ActivityUsr();
 				
-				if(null == userIdentity.getJson()){
-				userIdentity.setCredential(null);
+				if(null == userIdentity.getInfo()){
+			//	userIdentity.setCredential(null);
 			}else{
-				userIdentity.setCredential(userIdentity.getJson().get("openid").toString());
-				JSONObject userJson = WXUtil.GetWXUser(userIdentity.getJson().get("openid").toString(), userIdentity.getJson().get("access_token").toString());
+			//	userIdentity.setCredential(userIdentity.getJson().get("openid").toString());
+			//	userIdentity.setCredential(userIdentity.getInfo().get("unionid").toString());
+			/*	JSONObject userJson = WXUtil.GetWXUser(userIdentity.getJson().get("openid").toString(), userIdentity.getJson().get("access_token").toString());
 				activityUsr.setNickname(userJson.get("nickname").toString());
-				activityUsr.setPortrait(userJson.get("headimgurl").toString());
+				activityUsr.setPortrait(userJson.get("headimgurl").toString());*/
+				activityUsr.setIsWx(1);
+				activityUsr.setNickname(userIdentity.getInfo().get("nickname").toString());
+				activityUsr.setPortrait(userIdentity.getInfo().get("headimgurl").toString());
 			}
 		userIdentityMapper.insertSelective(userIdentity);
 		
 		
-		if(userIdentity.getNickname() != null){
+		/*if(userIdentity.getNickname() != null){
 			activityUsr.setNickname(userIdentity.getNickname());
-		}
+		}*/
 		if(null != userIdentity.getPassword()){			
 			activityUsr.setPassword(MD5.getMd5HashPasswod(userIdentity.getPassword()));
 			activityUsr.setNickname(userIdentity.getNickname());
@@ -80,9 +80,14 @@ public class UserIdentityServiceImpl implements UserIdentityService {
 		UserIdentityExample.Criteria criteria = userIdentityExample.createCriteria();
 		criteria.andIdentifierEqualTo(userIdentity.getIdentifier());		
 		UserIdentity userIdentity2 = new UserIdentity();
-		userIdentity2.setCredential(userIdentity.getJson().get("openid").toString());
+		userIdentity2.setCredential(userIdentity.getInfo().get("unionid").toString());
 		userIdentityMapper.updateByExampleSelective(userIdentity2, userIdentityExample);
-		userIdentity.setCredential(userIdentity.getJson().get("openid").toString());
+		
+		ActivityUsr activityUsr = new ActivityUsr();
+		activityUsr.setUseId(userIdentity.getUseId());
+		activityUsr.setIsWx(1);
+		activityUsrMapper.updateByUseIdSelective(activityUsr);
+		userIdentity.setCredential(userIdentity.getInfo().get("unionid").toString());
 		return userIdentity;
 	}
 	@Override

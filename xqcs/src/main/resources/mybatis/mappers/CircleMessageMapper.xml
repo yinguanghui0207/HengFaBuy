@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunqi.mapper.CircleMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.xunqi.pojo.CircleMessage" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="use_id" property="useId" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="lng" property="lng" jdbcType="DECIMAL" />
+    <result column="lat" property="lat" jdbcType="DECIMAL" />
+    <result column="msg_limit" property="msgLimit" jdbcType="INTEGER" />
+    <result column="msg_type" property="msgType" jdbcType="VARCHAR" />
+    <result column="msg_company" property="msgCompany" jdbcType="VARCHAR" />
+    <result column="msg_view" property="msgView" jdbcType="INTEGER" />
+    <result column="msg_reply" property="msgReply" jdbcType="INTEGER" />
+    <result column="msg_praise" property="msgPraise" jdbcType="INTEGER" />
+    <result column="msg_state" property="msgState" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    
+     <!-- 扩展字段 -->
+    <result column="ranges" property="ranges" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, use_id, content, picture, lng, lat, msg_limit, msg_type, msg_company, msg_view, 
+    msg_reply, msg_praise, msg_state, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xunqi.pojo.CircleMessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from circle_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    limit #{beginRow},#{pageSize} 
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from circle_message
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from circle_message
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xunqi.pojo.CircleMessageExample" >
+    delete from circle_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunqi.pojo.CircleMessage" >
+    insert into circle_message (id, use_id, content, 
+      picture, lng, lat, 
+      msg_limit, msg_type, msg_company, 
+      msg_view, msg_reply, msg_praise, 
+      msg_state, create_time)
+    values (#{id,jdbcType=INTEGER}, #{useId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{picture,jdbcType=VARCHAR}, #{lng,jdbcType=DECIMAL}, #{lat,jdbcType=DECIMAL}, 
+      #{msgLimit,jdbcType=INTEGER}, #{msgType,jdbcType=VARCHAR}, #{msgCompany,jdbcType=VARCHAR}, 
+      #{msgView,jdbcType=INTEGER}, #{msgReply,jdbcType=INTEGER}, #{msgPraise,jdbcType=INTEGER}, 
+      #{msgState,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunqi.pojo.CircleMessage" >
+    insert into circle_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="useId != null" >
+        use_id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="lng != null" >
+        lng,
+      </if>
+      <if test="lat != null" >
+        lat,
+      </if>
+      <if test="msgLimit != null" >
+        msg_limit,
+      </if>
+      <if test="msgType != null" >
+        msg_type,
+      </if>
+      <if test="msgCompany != null" >
+        msg_company,
+      </if>
+      <if test="msgView != null" >
+        msg_view,
+      </if>
+      <if test="msgReply != null" >
+        msg_reply,
+      </if>
+      <if test="msgPraise != null" >
+        msg_praise,
+      </if>
+      <if test="msgState != null" >
+        msg_state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="useId != null" >
+        #{useId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null" >
+        #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="msgLimit != null" >
+        #{msgLimit,jdbcType=INTEGER},
+      </if>
+      <if test="msgType != null" >
+        #{msgType,jdbcType=VARCHAR},
+      </if>
+      <if test="msgCompany != null" >
+        #{msgCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="msgView != null" >
+        #{msgView,jdbcType=INTEGER},
+      </if>
+      <if test="msgReply != null" >
+        #{msgReply,jdbcType=INTEGER},
+      </if>
+      <if test="msgPraise != null" >
+        #{msgPraise,jdbcType=INTEGER},
+      </if>
+      <if test="msgState != null" >
+        #{msgState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunqi.pojo.CircleMessageExample" resultType="java.lang.Integer" >
+    select count(*) from circle_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update circle_message
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.useId != null" >
+        use_id = #{record.useId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picture != null" >
+        picture = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lng != null" >
+        lng = #{record.lng,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lat != null" >
+        lat = #{record.lat,jdbcType=DECIMAL},
+      </if>
+      <if test="record.msgLimit != null" >
+        msg_limit = #{record.msgLimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.msgType != null" >
+        msg_type = #{record.msgType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgCompany != null" >
+        msg_company = #{record.msgCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgView != null" >
+        msg_view = #{record.msgView,jdbcType=INTEGER},
+      </if>
+      <if test="record.msgReply != null" >
+        msg_reply = #{record.msgReply,jdbcType=INTEGER},
+      </if>
+      <if test="record.msgPraise != null" >
+        msg_praise = #{record.msgPraise,jdbcType=INTEGER},
+      </if>
+      <if test="record.msgState != null" >
+        msg_state = #{record.msgState,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update circle_message
+    set id = #{record.id,jdbcType=INTEGER},
+      use_id = #{record.useId,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      picture = #{record.picture,jdbcType=VARCHAR},
+      lng = #{record.lng,jdbcType=DECIMAL},
+      lat = #{record.lat,jdbcType=DECIMAL},
+      msg_limit = #{record.msgLimit,jdbcType=INTEGER},
+      msg_type = #{record.msgType,jdbcType=VARCHAR},
+      msg_company = #{record.msgCompany,jdbcType=VARCHAR},
+      msg_view = #{record.msgView,jdbcType=INTEGER},
+      msg_reply = #{record.msgReply,jdbcType=INTEGER},
+      msg_praise = #{record.msgPraise,jdbcType=INTEGER},
+      msg_state = #{record.msgState,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunqi.pojo.CircleMessage" >
+    update circle_message
+    <set >
+      <if test="useId != null" >
+        use_id = #{useId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null" >
+        lng = #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="msgLimit != null" >
+        msg_limit = #{msgLimit,jdbcType=INTEGER},
+      </if>
+      <if test="msgType != null" >
+        msg_type = #{msgType,jdbcType=VARCHAR},
+      </if>
+      <if test="msgCompany != null" >
+        msg_company = #{msgCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="msgView != null" >
+        msg_view = #{msgView,jdbcType=INTEGER},
+      </if>
+      <if test="msgReply != null" >
+        msg_reply = #{msgReply,jdbcType=INTEGER},
+      </if>
+      <if test="msgPraise != null" >
+        msg_praise = #{msgPraise,jdbcType=INTEGER},
+      </if>
+      <if test="msgState != null" >
+        msg_state = #{msgState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunqi.pojo.CircleMessage" >
+    update circle_message
+    set use_id = #{useId,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      lng = #{lng,jdbcType=DECIMAL},
+      lat = #{lat,jdbcType=DECIMAL},
+      msg_limit = #{msgLimit,jdbcType=INTEGER},
+      msg_type = #{msgType,jdbcType=VARCHAR},
+      msg_company = #{msgCompany,jdbcType=VARCHAR},
+      msg_view = #{msgView,jdbcType=INTEGER},
+      msg_reply = #{msgReply,jdbcType=INTEGER},
+      msg_praise = #{msgPraise,jdbcType=INTEGER},
+      msg_state = #{msgState,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+    <select id="selectByRange" resultMap="BaseResultMap" parameterType="map" >
+    select
+   	*, ROUND(
+	        6378.138 * 2 * ASIN(
+	            SQRT(
+	                POW(
+	                    SIN(
+	                        (
+	                            #{record.lat} * PI() / 180 - lat * PI() / 180
+	                        ) / 2
+	                    ),
+	                    2
+	                ) + COS(#{record.lat} * PI() / 180) * COS(lat * PI() / 180) * POW(
+	                    SIN(
+	                        (
+	                            #{record.lng} * PI() / 180 - lng * PI() / 180
+	                        ) / 2
+	                    ),
+	                    2
+	                )
+	            )
+	        ) * 1000
+	    ) AS ranges
+    from circle_message 
+    <where>
+      	<if test="record.msgState != null" >
+        msg_state = #{record.msgState,jdbcType=INTEGER}
+      </if>
+          </where>
+           ORDER BY ranges ASC 
+           limit #{example.beginRow},#{example.pageSize} 
+    
+  </select>
+  
+ <select id="selectByuseIdList" resultMap="BaseResultMap" parameterType="map">
+    select * from  circle_message  
+    <where>
+    msg_state = 0  
+    <if test="useIdList != null">
+    and use_id in <foreach collection="useIdList" item="useId" open="(" close=")" separator=",">
+    #{useId,jdbcType=VARCHAR}
+     </foreach>
+   </if>
+    </where>
+  limit #{example.beginRow},#{example.pageSize} 
+  </select> 
+  
+   <update id="updateMsgviewByPrimaryKey" parameterType="com.xunqi.pojo.CircleMessage" >
+    update circle_message
+    set 
+      msg_view = msg_view + 1
+     
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+   <update id="updateMsgreplyByPrimaryKey" parameterType="com.xunqi.pojo.CircleMessage" >
+    update circle_message
+    set           
+      msg_reply = msg_reply + 1
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+   <update id="updateMsgpraiseByPrimaryKey" parameterType="com.xunqi.pojo.CircleMessage" >
+    update circle_message
+    set 
+       msg_praise = msg_praise + 1     
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+   <update id="updateMsgpraise1ByPrimaryKey" parameterType="com.xunqi.pojo.CircleMessage" >
+    update circle_message
+    set 
+       msg_praise = msg_praise - 1     
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+    
+ <select id="findByMsgIds" resultMap="BaseResultMap" parameterType="map">
+    select * from  circle_message  
+    <where>
+     id in <foreach collection="ids" item="id" open="(" close=")" separator=",">
+    #{id,jdbcType=INTEGER}
+     </foreach>
+    </where>
+    limit #{example.beginRow},#{example.pageSize} 
+    </select> 
+</mapper>

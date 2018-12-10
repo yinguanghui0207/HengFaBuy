@@ -749,4 +749,15 @@
 	(state = 1 AND unix_timestamp(NOW()) BETWEEN unix_timestamp(start_time) AND unix_timestamp(end_time))
 	)a ) 
   </update> 
+  
+  <select id="findByActivityIds"  parameterType="map" resultMap="BaseResultMap">
+		SELECT * FROM xq_activity 
+		<where>
+         activity_id in 
+         <foreach collection="ids" item="activityId" open="(" close=")" separator=",">
+         #{activityId,jdbcType=INTEGER}
+         </foreach>
+         </where>
+           limit #{example.beginRow},#{example.pageSize}    
+	</select>
 </mapper>
